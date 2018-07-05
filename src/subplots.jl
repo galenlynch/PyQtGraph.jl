@@ -19,6 +19,16 @@ function link_x_dims(handles::AbstractArray{PyObject})
     end
 end
 
+"""
+    subplot_grid(layout, rowspec; titles)
+
+Makes grid of subplots in layout object, `layout`.
+
+Currently can only make a column of subplots.
+
+The organization of the grid is specified by rowspec, an array of relative sizes,
+which specifies how big each window is.
+"""
 function subplot_grid(
     layout::PyObject,
     rowspec::AbstractArray{<:Integer} = [1];
