@@ -13,11 +13,12 @@ export
     qtg,
 
     # functions
+    get_viewbox,
     layout_widget,
     link_x_dims,
     linked_subplot_grid,
-    subplot_grid,
-    get_viewbox
+    plotwindow,
+    subplot_grid
 
 const pg = PyNULL()
 const qtc = PyNULL()
@@ -27,6 +28,7 @@ const qt5 = PyNULL()
 include("util.jl")
 include("app.jl")
 include("subplots.jl")
+include("window.jl")
 
 function __init__()
     copy!(qt5, pyimport("PyQt5"))
