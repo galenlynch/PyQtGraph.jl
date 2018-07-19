@@ -11,6 +11,7 @@ export
     pg,
     qtc,
     qtg,
+    rgv,
 
     # functions
     get_viewbox,
@@ -24,6 +25,7 @@ const pg = PyNULL()
 const qtc = PyNULL()
 const qtg = PyNULL()
 const qt5 = PyNULL()
+const rgv = PyNULL()
 
 include("util.jl")
 include("app.jl")
@@ -35,6 +37,7 @@ function __init__()
     copy!(pg, pyimport("pyqtgraph"))
     copy!(qtc, pg[:Qt][:QtCore])
     copy!(qtg, pg[:Qt][:QtGui])
+    copy!(rgv, pyimport("pyqtgraph.widgets.RemoteGraphicsView"))
 end
 
 end # module
