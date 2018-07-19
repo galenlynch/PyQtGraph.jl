@@ -5,8 +5,8 @@ end
 QtApp() = QtApp(qtg[:QApplication]([]))
 
 function (app::QtApp)(win::PyObject)
-    win[:show]()
-    app.app[:exec_]()
+    win[:show]()::Void
+    app.app[:exec_]()::Int
 end
 
-(app::QtApp)() = app.app[:exec_]()
+(app::QtApp)() = app.app[:exec_]()::Int
