@@ -35,7 +35,7 @@ function subplot_grid(
     titles::AbstractVector{<:AbstractString} = Vector{String}()
 )
     n_row = length(rowspec)
-    plot_handles = Vector{PyObject}(n_row)
+    @compat plot_handles = Vector{PyObject}(undef, n_row)
     use_titles = length(titles) == n_row
     for (i, row_height) in enumerate(rowspec)
         kwargs = use_titles ? ((:title, titles[i]),) : ()

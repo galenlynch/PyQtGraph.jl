@@ -1,7 +1,7 @@
 __precompile__()
 module PyQtGraph
 
-using PyCall
+using Compat, PyCall
 
 export
     # Types
