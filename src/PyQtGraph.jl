@@ -14,6 +14,9 @@ export
     rgv,
 
     # functions
+    convert_qdate,
+    convert_qdatetime,
+    convert_qtime,
     get_viewbox,
     layout_widget,
     link_x_dims,

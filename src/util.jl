@@ -5,3 +5,22 @@ function get_viewbox(a::PyObject)
     end
     return vb
 end
+
+function convert_qdate(qdate::PyObject)
+    Date(qdate[:year]()::Int, qdate[:month]()::Int, qdate[:day]()::Int)
+end
+
+function convert_qtime(qtime::PyObject)
+    Time(
+        qtime[:hour]()::Int,
+        qtime[:minute]()::Int,
+        qtime[:second]()::Int,
+        qtime[:msec]()::Int
+    )
+end
+
+function convert_qdatetime(qdatetime::PyObject)
+    qdate = qdatetime[:date]()::PyObject
+    qtime = qdatetime[:time]()::PyObject
+    DateTime(convert_qdate(qdate)) + convert_qtime(qtime).instant
+end
