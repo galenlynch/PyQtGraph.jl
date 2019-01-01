@@ -1,7 +1,7 @@
 __precompile__()
 module PyQtGraph
 
-using Compat, PyCall
+using Compat, PyCall, Dates
 
 export
     # Types
@@ -9,8 +9,10 @@ export
 
     # Python modules
     pg,
+    qt5,
     qtc,
     qtg,
+    qtw,
     rgv,
 
     # functions
@@ -25,9 +27,10 @@ export
     subplot_grid
 
 const pg = PyNULL()
+const qt5 = PyNULL()
 const qtc = PyNULL()
 const qtg = PyNULL()
-const qt5 = PyNULL()
+const qtw = PyNULL()
 const rgv = PyNULL()
 
 include("util.jl")
@@ -40,6 +43,7 @@ function __init__()
     copy!(pg, pyimport("pyqtgraph"))
     copy!(qtc, pg[:Qt][:QtCore])
     copy!(qtg, pg[:Qt][:QtGui])
+    copy!(qtw, qt5[:QtWidgets])
     copy!(rgv, pyimport("pyqtgraph.widgets.RemoteGraphicsView"))
 end
 
