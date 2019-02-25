@@ -2,11 +2,11 @@ struct QtApp
     app::PyObject
 end
 
-QtApp() = QtApp(qtg[:QApplication]([]))
+QtApp() = QtApp(qtg.QApplication([]))
 
 function (app::QtApp)(win::PyObject)
-    @compat win[:show]()::Nothing
-    app.app[:exec_]()::Int
+    @compat win.show()::Nothing
+    app.app.exec_()::Int
 end
 
-(app::QtApp)() = app.app[:exec_]()::Int
+(app::QtApp)() = app.app.exec_()::Int

@@ -1,4 +1,4 @@
-layout_widget() =  pg[:GraphicsLayoutWidget]()
+layout_widget() =  pg.GraphicsLayoutWidget()
 
 function linked_subplot_grid(
     win::PyObject, args::Vararg{AbstractArray}; kwargs...
@@ -15,7 +15,7 @@ end
 function link_x_dims(handles::AbstractArray{PyObject})
     length(handles) <= 1 && return
     for handle in handles[2:end]
-        handle[:setXLink](handles[1])
+        handle.setXLink(handles[1])
     end
 end
 
@@ -39,9 +39,9 @@ function subplot_grid(
     use_titles = length(titles) == n_row
     for (i, row_height) in enumerate(rowspec)
         kwargs = use_titles ? ((:title, titles[i]),) : ()
-        i > 1 && layout[:nextRow]()
-        plot_handles[i] = layout[:addPlot](;kwargs...)
-        layout[:ci][:layout][:setRowStretchFactor](i - 1, row_height)
+        i > 1 && layout.nextRow()
+        plot_handles[i] = layout.addPlot(;kwargs...)
+        layout.ci.layout.setRowStretchFactor(i - 1, row_height)
     end
     plot_handles
 end

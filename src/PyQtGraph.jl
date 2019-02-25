@@ -41,9 +41,9 @@ include("window.jl")
 function __init__()
     copy!(qt5, pyimport_conda("PyQt5", "pyqt"))
     copy!(pg, pyimport_conda("pyqtgraph", "pyqtgraph"))
-    copy!(qtc, pg[:Qt][:QtCore])
-    copy!(qtg, pg[:Qt][:QtGui])
-    copy!(qtw, pg[:Qt][:QtWidgets])
+    copy!(qtc, pg.Qt.QtCore)
+    copy!(qtg, pg.Qt.QtGui)
+    copy!(qtw, pg.Qt.QtWidgets)
     copy!(rgv, pyimport("pyqtgraph.widgets.RemoteGraphicsView"))
 end
 
