@@ -1,7 +1,7 @@
 name = "PyQtGraph"
 uuid = "3671797b-b403-50f8-ae8f-9a67aa3877b6"
 authors = ["Galen Lynch <galen.lynch@gmail.com>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 Compat = "34da2185-b29b-5c13-b0c7-acf172513d20"

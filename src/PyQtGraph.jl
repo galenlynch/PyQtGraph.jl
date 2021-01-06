@@ -39,6 +39,7 @@ include("subplots.jl")
 include("window.jl")
 
 function __init__()
+    ENV["PYQTGRAPH_QT_LIB"] = "PyQt5"
     copy!(qt5, pyimport_conda("PyQt5", "pyqt"))
     copy!(pg, pyimport_conda("pyqtgraph", "pyqtgraph"))
     copy!(qtc, pg.Qt.QtCore)
