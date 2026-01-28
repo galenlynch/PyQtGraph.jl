@@ -5,7 +5,7 @@ end
 QtApp() = QtApp(qtg.QApplication([]))
 
 function (app::QtApp)(win::PyObject)
-    @compat win.show()::Nothing
+    win.show()::Nothing
     app.app.exec_()::Int
 end
 
