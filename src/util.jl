@@ -1,26 +1,32 @@
-function get_viewbox(a::PyObject)
+function get_viewbox(a::Py)
     vb = a
-    while vb != nothing && vb.__class__.__name__ != "ViewBox"
+    while !isnone(vb) && pyconvert(String, vb.__class__.__name__) != "ViewBox"
         vb = vb.getViewBox()
     end
     return vb
 end
 
-function convert_qdate(qdate::PyObject)
-    Date(qdate.year()::Int, qdate.month()::Int, qdate.day()::Int)
-end
-
-function convert_qtime(qtime::PyObject)
-    Time(
-        qtime.hour()::Int,
-        qtime.minute()::Int,
-        qtime.second()::Int,
-        qtime.msec()::Int
+function convert_qdate(qdate::Py)
+    Date(
+        pyconvert(Int, qdate.year()),
+        pyconvert(Int, qdate.month()),
+        pyconvert(Int, qdate.day()),
     )
 end
 
-function convert_qdatetime(qdatetime::PyObject)
-    qdate = qdatetime.date()::PyObject
-    qtime = qdatetime.time()::PyObject
+function convert_qtime(qtime::Py)
+    Time(
+        pyconvert(Int, qtime.hour()),
+        pyconvert(Int, qtime.minute()),
+        pyconvert(Int, qtime.second()),
+        pyconvert(Int, qtime.msec()),
+    )
+end
+
+function convert_qdatetime(qdatetime::Py)
+    qdate = qdatetime.date()
+    qtime = qdatetime.time()
     DateTime(convert_qdate(qdate)) + convert_qtime(qtime).instant
 end
+
+isnone(x::Py) = pyis(x, pybuiltins.None)

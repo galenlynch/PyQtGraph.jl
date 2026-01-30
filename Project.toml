@@ -1,12 +1,12 @@
 name = "PyQtGraph"
 uuid = "3671797b-b403-50f8-ae8f-9a67aa3877b6"
+version = "0.1.2"
 authors = ["Galen Lynch <galen@galenlynch.com>"]
-version = "0.1.1"
 
 [deps]
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
-PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
+PythonCall = "6099a3de-0909-46bc-b1f4-468b9a2dfc0d"
 
 [compat]
-PyCall = "1.11"
-julia = "0.6 - 1"
+PythonCall = "0.9"
+julia = "1.10"

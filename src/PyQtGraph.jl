@@ -1,7 +1,7 @@
-__precompile__()
 module PyQtGraph
 
-using Compat, PyCall, Dates
+using Dates: Date, Time, DateTime
+using PythonCall: pynew, pycopy!, pyimport, Py, pyconvert, pylist, pyis, pybuiltins
 
 export
     # Types
@@ -9,7 +9,7 @@ export
 
     # Python modules
     pg,
-    qt5,
+    qt6,
     qtc,
     qtg,
     qtw,
@@ -26,12 +26,12 @@ export
     plotwindow,
     subplot_grid
 
-const pg = PyNULL()
-const qt5 = PyNULL()
-const qtc = PyNULL()
-const qtg = PyNULL()
-const qtw = PyNULL()
-const rgv = PyNULL()
+const pg = pynew()
+const qt6 = pynew()
+const qtc = pynew()
+const qtg = pynew()
+const qtw = pynew()
+const rgv = pynew()
 
 include("util.jl")
 include("app.jl")
@@ -39,13 +39,13 @@ include("subplots.jl")
 include("window.jl")
 
 function __init__()
-    ENV["PYQTGRAPH_QT_LIB"] = "PyQt5"
-    copy!(qt5, pyimport_conda("PyQt5", "pyqt"))
-    copy!(pg, pyimport_conda("pyqtgraph", "pyqtgraph"))
-    copy!(qtc, pg.Qt.QtCore)
-    copy!(qtg, pg.Qt.QtGui)
-    copy!(qtw, pg.Qt.QtWidgets)
-    copy!(rgv, pyimport("pyqtgraph.widgets.RemoteGraphicsView"))
+    pycopy!(qt6, pyimport("PyQt6"))
+    pycopy!(pg, pyimport("pyqtgraph"))
+    pycopy!(qtc, pg.Qt.QtCore)
+    pycopy!(qtg, pg.Qt.QtGui)
+    pycopy!(qtw, pg.Qt.QtWidgets)
+    pycopy!(rgv, pyimport("pyqtgraph.widgets.RemoteGraphicsView"))
+    return nothing
 end
 
 end # module
