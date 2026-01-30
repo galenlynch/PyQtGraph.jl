@@ -1,12 +1,16 @@
+struct PlotWindow
+    win::Py
+end
+
 struct QtApp
-    app::PyObject
+    app::Py
 end
 
-QtApp() = QtApp(qtg.QApplication([]))
+QtApp() = QtApp(qtw.QApplication(pylist()))
 
-function (app::QtApp)(win::PyObject)
-    win.show()::Nothing
-    app.app.exec_()::Int
+function (app::QtApp)(win::PlotWindow)
+    win.win.show()
+    pyconvert(Int, app.app.exec())
 end
 
-(app::QtApp)() = app.app.exec_()::Int
+(app::QtApp)() = pyconvert(Int, app.app.exec())

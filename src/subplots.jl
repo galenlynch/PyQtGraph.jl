@@ -1,7 +1,7 @@
 layout_widget() =  pg.GraphicsLayoutWidget()
 
 function linked_subplot_grid(
-    win::PyObject, args::Vararg{AbstractArray}; kwargs...
+    win::Py, args::Vararg{AbstractArray}; kwargs...
 )
     plot_handles = subplot_grid(win, args...; kwargs...)
     link_x_dims(plot_handles)
@@ -12,7 +12,7 @@ function linked_subplot_grid(args::Vararg{AbstractArray}; kwargs...)
     (win, linked_subplot_grid(win, args...; kwargs...))
 end
 
-function link_x_dims(handles::AbstractArray{PyObject})
+function link_x_dims(handles::AbstractArray{<:Py})
     length(handles) <= 1 && return
     for handle in handles[2:end]
         handle.setXLink(handles[1])
@@ -30,12 +30,12 @@ The organization of the grid is specified by rowspec, an array of relative sizes
 which specifies how big each window is.
 """
 function subplot_grid(
-    layout::PyObject,
+    layout::Py,
     rowspec::AbstractArray{<:Integer} = [1];
     titles::AbstractVector{<:AbstractString} = Vector{String}()
 )
     n_row = length(rowspec)
-    plot_handles = Vector{PyObject}(undef, n_row)
+    plot_handles = Vector{Py}(undef, n_row)
     use_titles = length(titles) == n_row
     for (i, row_height) in enumerate(rowspec)
         kwargs = use_titles ? ((:title, titles[i]),) : ()
